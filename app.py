@@ -70,7 +70,7 @@ def index():
 
 @app.route('/meme', methods=['GET'])
 @app.route('/meme/<id>', methods=['GET'])
-def meme(id=None):
+def meme(id):
     if id:
         meme = Meme.get(Meme.id == id)
         meme = model_to_dict(meme)
@@ -82,7 +82,7 @@ def meme(id=None):
 
 
 @app.route('/name/<name>', methods=['GET'])
-def name(name=None):
+def name(name):
     if name:
         meme = Meme.get(Meme.name == name)
         meme = model_to_dict(meme)
@@ -94,7 +94,7 @@ def name(name=None):
 
 
 @app.route('/width/<width>', methods=['GET'])
-def width(width=None):
+def width(width):
     if width:
         meme = Meme.get(Meme.width == width)
         meme = model_to_dict(meme)
@@ -106,7 +106,7 @@ def width(width=None):
 
 
 @app.route('/height/<height>', methods=['GET'])
-def height(height=None):
+def height(height):
     if height:
         meme = Meme.get(Meme.height == height)
         meme = model_to_dict(meme)
@@ -118,7 +118,7 @@ def height(height=None):
 
 
 @app.route('/box_count/<box_count>', methods=['GET'])
-def box(box_count=None):
+def box(box_count):
     if box_count:
         meme = Meme.get(Meme.box_count == box_count)
         meme = model_to_dict(meme)
