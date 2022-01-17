@@ -45,52 +45,50 @@ def meme(id=None):
 @app.route('/memes/name/<name>', methods=['GET'])
 def name(name=None):
     if name:
-        meme = Memes.get(Memes.name == name)
-        meme = model_to_dict(meme)
-        return jsonify(meme)
-    else:
-        memes = []
-        for meme in Memes.select():
-            memes.append(model_to_dict(meme))
-        return jsonify(memes)
+        name_list = []
+        for meme in Memes.select().where(Memes.name == name):
+            name_list.append(model_to_dict(meme))
+            return jsonify(meme)
+        if len(name_list) == 0:
+            return jsonify({"Error": "Name not found"})
+        else:
+            return jsonify(name_list)
 
 
 @app.route('/memes/width/<width>', methods=['GET'])
 def width(width=None):
     if width:
-        meme_list = []
+        width_list = []
         for meme in Memes.select().where(Memes.width == width):
-            meme_list.append(model_to_dict(meme))
-        if len(meme_list) == 0:
+            width_list.append(model_to_dict(meme))
+        if len(width_list) == 0:
             return jsonify({"Error": "Width not found"})
         else:
-            return jsonify(meme_list)
+            return jsonify(width_list)
 
 
 @app.route('/memes/height/<height>', methods=['GET'])
 def height(height=None):
     if height:
-        meme = Memes.get(Memes.height == height)
-        meme = model_to_dict(meme)
-        return jsonify(meme)
-    else:
-        memes = []
-        for meme in Memes.select():
-            memes.append(model_to_dict(meme))
-        return jsonify(memes)
+        height_list = []
+        for meme in Memes.select().where(Memes.height == height):
+            height_list.append(model_to_dict(meme))
+        if len(height_list) == 0:
+            return jsonify({"Error": "Height not found"})
+        else:
+            return jsonify(height_list)
 
 
 @app.route('/memes/box_count/<box_count>', methods=['GET'])
 def box(box_count=None):
     if box_count:
-        meme = Memes.get(Memes.box_count == box_count)
-        meme = model_to_dict(meme)
-        return jsonify(meme)
-    else:
-        memes = []
-        for meme in Memes.select():
-            memes.append(model_to_dict(meme))
-        return jsonify(memes)
+        box_count_list = []
+        for meme in Memes.select().where(Memes.box_count == box_count):
+            box_count_list.append(model_to_dict(meme))
+        if len(box_count_list) == 0:
+            return jsonify({"Error": "Box count not found"})
+        else:
+            return jsonify(box_count_list)
 
 
 @app.route('/', methods=['GET', 'PUT', 'POST', 'DELETE'])
